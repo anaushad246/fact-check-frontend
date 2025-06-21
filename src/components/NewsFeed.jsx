@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Newspaper, Calendar } from 'lucide-react';
+import api from '../api';
 
 const CATEGORIES = [
   "general",
@@ -9,6 +10,7 @@ const CATEGORIES = [
   "science",
   "sports",
   "technology",
+  "space",
 ];
 
 const KEYWORDS = [
@@ -18,7 +20,6 @@ const KEYWORDS = [
   "education",
   "climate change",
   "startups",
-  "space",
 ];
 
 const API_KEY = "49a92db9de6140c19b2efa9a9d14044a";
@@ -37,21 +38,17 @@ export default function NewsFeed({ limit = null }) {
       setLoading(true);
       setError(null);
       try {
-        let url = "";
+        const params = new URLSearchParams();
         if (mode === "category") {
-          url = `${HEADLINES_URL}?country=us&category=${selected}&apiKey=${API_KEY}`;
+          params.append('category', selected);
         } else {
-          url = `${EVERYTHING_URL}?q=${encodeURIComponent(
-            selected
-          )}&language=en&sortBy=publishedAt&pageSize=20&apiKey=${API_KEY}`;
+          params.append('q', selected);
         }
-
-        const res = await fetch(url);
-        const data = await res.json();
-        if (data.status !== "ok") throw new Error(data.message);
-        setArticles(data.articles);
+        
+        const response = await api.get('/fact-check/news', { params });
+        setArticles(response.data.articles || []);
       } catch (err) {
-        setError(err.message);
+        setError(err.response?.data?.error || 'Failed to fetch news articles.');
         setArticles([]);
       } finally {
         setLoading(false);
