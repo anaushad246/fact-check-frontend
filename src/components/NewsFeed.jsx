@@ -45,7 +45,7 @@ export default function NewsFeed({ limit = null }) {
           params.append('q', selected);
         }
         
-        const response = await api.get('/news', { params });
+        const response = await api.get('api/news', { params });
         setArticles(response.data.articles || []);
       } catch (err) {
         setError(err.response?.data?.error || 'Failed to fetch news articles.');
