@@ -36,7 +36,6 @@ export default function FactCheckDashboard() {
 
       // Priority 1: Check for an image from the store.
       if (imageFile) {
-        setShowLoading(true);
         const fetchImageResult = async () => {
           try {
             const formData = new FormData();
@@ -58,7 +57,6 @@ export default function FactCheckDashboard() {
       } 
       // Priority 2: Check for a text claim from the URL.
       else if (urlClaim) {
-        setShowLoading(true);
         const fetchTextResult = async () => {
           try {
             const response = await api.post(`/fact-check`, {
