@@ -6,8 +6,8 @@ import AboutPage from './pages/AboutPage';
 import HistoryPage from './pages/HistoryPage';
 import NewsPage from './pages/NewsPage';
 import FactCheckDashboard from './pages/FactCheckDashboard';
-import BlogPage from './pages/BlogPage';
 import Footer from './components/Footer';
+import BlogPage from './pages/BlogPage';
 
 function App() {
   return (
