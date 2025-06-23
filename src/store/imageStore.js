@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import create from 'zustand';
 
 /**
  * A simple Zustand store to hold the image file temporarily
