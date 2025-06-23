@@ -38,16 +38,11 @@ export default function FactCheckDashboard() {
             const formData = new FormData();
             formData.append('image', imageFile);
 
-            // const response = await api.post(`/fact-check-image`, formData, {
-            //   headers: { 'Content-Type': 'multipart/form-data' },
-            // });
             const response = await api.post(`/fact-check-image`, formData, {
               headers: { 'Content-Type': 'multipart/form-data' },
             });
-            
+
             console.log("Frontend received data:", response.data); // ✅ LOG HERE
-            setResult(response.data);
-            
 
             setResult(response.data);
           } catch (err) {
