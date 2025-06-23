@@ -182,31 +182,35 @@ export default function FactCheckResult({ result, isLoading, error }) {
       <div className="w-full max-w-3xl mx-auto mt-4 space-y-4">
         {/* Summary Section */}
         <ResultSection
-          title="Summary"
-          icon={FileText}
-          isLoading={isLoading}
-          error={error}
-        >
-          {/* <p className="text-gray-700">{result.summary?.text || 'No summary available'}</p> */}
-          {result.summary?.labels && result.summary.labels.length > 0 && (
-            <div className="mt-4">
-              <h4 className="text-sm font-medium text-gray-500 mb-2">Categories</h4>
-              <div className="flex flex-wrap gap-2">
-                {result.summary.labels.map((label, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
-                  >
-                    {label}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-          <p className="mt-4 text-sm text-gray-500">
-            Found {result.summary?.claimReviewCount || 0} fact-check results
-          </p>
-        </ResultSection>
+  title="Summary"
+  icon={FileText}
+  isLoading={isLoading}
+  error={error}
+>
+  <p className="text-gray-700 text-sm whitespace-pre-line">
+    {result.summary?.text || 'No summary available'}
+  </p>
+
+  {result.summary?.labels && result.summary.labels.length > 0 && (
+    <div className="mt-4">
+      <h4 className="text-sm font-medium text-gray-500 mb-2">Categories</h4>
+      <div className="flex flex-wrap gap-2">
+        {result.summary.labels.map((label, index) => (
+          <span
+            key={index}
+            className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
+          >
+            {label}
+          </span>
+        ))}
+      </div>
+    </div>
+  )}
+  <p className="mt-4 text-sm text-gray-500">
+    Found {result.summary?.claimReviewCount || 0} fact-check results
+  </p>
+</ResultSection>
+
 
         <ResultSection title="AI Analysis" icon={Brain} isLoading={isLoading} error={error}>
           <p className="text-gray-700 whitespace-pre-line text-sm">
