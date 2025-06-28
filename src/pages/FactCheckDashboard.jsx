@@ -140,58 +140,10 @@ export default function FactCheckDashboard() {
         {error && <div className="text-red-600 mb-4">{error}</div>}
 
         {/* AI Analysis Summary */}
-        {result && !hasDataFormatError && (
-          <div className="space-y-4">
-            <div className="bg-gradient-to-br from-white via-green-50 to-blue-50 rounded-xl shadow p-6 flex flex-col gap-2">
-              <span className="inline-block bg-red-100 text-red-800 rounded-full px-3 py-1 font-bold w-max">
-                {result.data?.aiAnalysis?.match(/(True|False|Misleading)/i)?.[0] || 'AI Verdict'}
-              </span>
-              <span className="text-gray-700">{result.data?.aiAnalysis}</span>
-              <span className="text-gray-400 text-sm">{result.data?.aiCategorization}</span>
-            </div>
+      {result && !hasDataFormatError && (
+  <FactCheckResult result={result} isLoading={showLoading} error={error} />
+)}
 
-            {/* Fact-Checked Results */}
-            <div className="space-y-4">
-              {claims.length > 0 ? (
-                claims.map((claim, idx) => (
-                  <div key={idx} className="bg-white rounded-xl shadow p-4 flex flex-col gap-2">
-                    <div className="flex justify-between items-center">
-                      <span className="font-semibold">{claim.claimant}</span>
-                      <span className="text-gray-400 text-xs">{claim.claimDate && new Date(claim.claimDate).toLocaleDateString()}</span>
-                    </div>
-                    <div className="text-gray-700 font-medium">{claim.text}</div>
-                    {claim.claimReview?.map((review, j) => (
-                      <div key={j} className="mt-2 border-t pt-2">
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm font-semibold">{review.publisher?.name}</span>
-                          <span className="bg-yellow-100 text-yellow-800 rounded-full px-2 py-1 text-xs">{review.textualRating}</span>
-                        </div>
-                        <a href={review.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline font-medium block mt-1">{review.title}</a>
-                        <span className="text-gray-400 text-xs">Reviewed: {review.reviewDate && new Date(review.reviewDate).toLocaleDateString()}</span>
-                      </div>
-                    ))}
-                  </div>
-                ))
-              ) : (
-                <div className="text-center text-gray-500 py-4">No fact-check articles found.</div>
-              )}
-            </div>
-
-            {/* Summary Section */}
-            <div className="bg-gradient-to-br from-white via-blue-50 to-purple-50 rounded-xl shadow p-4">
-              <h2 className="text-xl font-semibold mb-2">Summary</h2>
-              <p className="text-gray-700">{result.summary?.text}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {result.summary?.labels?.map((label, i) => (
-                  <span key={i} className="bg-blue-100 text-blue-700 rounded-full px-3 py-1 text-sm">{label}</span>
-                ))}
-              </div>
-              <div className="mt-2 text-xs text-gray-400">
-                Fact-check articles found: {result.summary?.claimReviewCount}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
