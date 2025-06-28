@@ -143,7 +143,36 @@ export default function FactCheckDashboard() {
       {result && !hasDataFormatError && (
         <>
          {console.log("Rendering result in JSX:", result)}
-         <FactCheckResult result={result} isLoading={showLoading} error={error} />
+         <FactCheckResult
+  result={{
+    data: {
+      factCheckResults: [
+        {
+          text: "Sample claim",
+          claimReview: [
+            {
+              textualRating: "False",
+              publisher: { name: "ABC News" },
+              reviewDate: "2024-01-01",
+              url: "https://example.com",
+              title: "Fact check title"
+            }
+          ],
+        }
+      ],
+      aiAnalysis: "This is AI's analysis.",
+      aiCategorization: "Category: Fake News"
+    },
+    summary: {
+      text: "Summary of the fact check",
+      labels: ["Fake", "Aircraft"],
+      claimReviewCount: 1
+    }
+  }}
+  isLoading={false}
+  error={null}
+/>
+
          </>
   
 )}
