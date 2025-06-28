@@ -170,9 +170,14 @@ export default function FactCheckResult({ result, isLoading, error }) {
     );
   }
 
+  // if (!result) {
+  //   return null;
+  // }
   if (!result) {
-    return null;
-  }
+  console.log("❗ No result passed to FactCheckResult");
+  return <div>No result received</div>; // So we at least see something
+}
+
 
   const claimResults = result.data?.factCheckResults?.claims || result.data?.factCheckResults || [];
   const claimCount = result.summary?.claimReviewCount || claimResults.length || 0;

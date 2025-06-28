@@ -141,7 +141,11 @@ export default function FactCheckDashboard() {
 
         {/* AI Analysis Summary */}
       {result && !hasDataFormatError && (
-  <FactCheckResult result={result} isLoading={showLoading} error={error} />
+        <>
+         {console.log("Rendering result in JSX:", result)}
+         <FactCheckResult result={result} isLoading={showLoading} error={error} />
+         </>
+  
 )}
 
       </div>
